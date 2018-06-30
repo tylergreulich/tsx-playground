@@ -4,10 +4,10 @@ import { getData } from '../../store/actions/swActions';
 import Planets from '../Planets';
 
 interface Props {
-  getData: () => any;
+  getData: () => void;
 }
 
-class Data extends React.Component<Props> {
+class Data extends React.Component<Props, {}> {
   public componentDidMount() {
     this.props.getData();
   }
@@ -15,14 +15,13 @@ class Data extends React.Component<Props> {
   public render() {
     return (
       <div>
-        <Planets  />
+        <Planets />
       </div>
     );
   }
 }
 
-
-export default connect<Props>(
+export default connect<{}, Props>(
   null,
   { getData }
 )(Data);

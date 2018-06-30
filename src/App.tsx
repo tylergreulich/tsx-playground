@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './App.css';
-import Data from './components/Data/Data';
 
 import { Provider } from 'react-redux';
 import store from './store/store';
+import Data from './components/Data/Data';
 
 class App extends React.Component {
   public render() {

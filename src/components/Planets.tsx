@@ -1,10 +1,6 @@
 import * as React from 'react';
 
-interface Props {
-  results: Array<string>;
-}
-
-const planets = (props: Props) => {
+const planets = (props: {}) => {
   return (
     <div>
       <h1>Planets Component</h1>

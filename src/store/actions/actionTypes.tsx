@@ -1,1 +1,3 @@
-export const GET_DATA = 'GET_DATA';
+export enum actionTypes {
+  GET_DATA
+}
