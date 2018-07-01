@@ -1,15 +1,13 @@
 import axios from 'axios';
-import { Action } from 'redux';
-import { actionTypes } from './actionTypes';
-import { Results } from '../../components/types';
+import { ActionTypes } from './actionTypes';
 
-export interface ResultAction extends Action {
-  result: Results[];
-}
-
-export const getData = () => (dispatch: any) => {
+export const getData = (
+  name: string,
+  population: string,
+  climate: string[] | string
+) => (dispatch: any) => {
   axios
     .get('https://swapi.co/api/planets/')
-    .then(res => dispatch({ type: actionTypes.GET_DATA }))
+    .then(res => dispatch({ type: ActionTypes.GET_DATA, payload: res.data }))
     .catch(err => console.log(err));
 };

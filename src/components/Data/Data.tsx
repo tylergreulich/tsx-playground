@@ -1,18 +1,30 @@
 import * as React from 'react';
+import * as Redux from 'redux';
 import { connect } from 'react-redux';
-import { getData } from '../../store/actions/swActions';
 import Planets from '../Planets';
+import { ActionTypes } from '../../store/actions/actionTypes';
 
-interface Props {
+interface OwnProps {
+  age: number;
+}
+
+interface StateProps {
+  results?: [any];
+}
+
+interface DispatchProps {
   getData: () => void;
 }
 
-class Data extends React.Component<Props, {}> {
+type Props = StateProps & DispatchProps & OwnProps;
+
+class Data extends React.Component<Props> {
   public componentDidMount() {
     this.props.getData();
   }
 
   public render() {
+    console.log(this.props.results);
     return (
       <div>
         <Planets />
@@ -21,7 +33,16 @@ class Data extends React.Component<Props, {}> {
   }
 }
 
-export default connect<{}, Props>(
-  null,
-  { getData }
+const mapStateToProps = (state: {}, ownProps: OwnProps): StateProps => ({});
+
+const mapDispatchToProps = (
+  dispatch: Redux.Dispatch<any>,
+  ownProps: OwnProps
+): DispatchProps => ({
+  getData: () => dispatch({ type: ActionTypes.GET_DATA })
+});
+
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
 )(Data);

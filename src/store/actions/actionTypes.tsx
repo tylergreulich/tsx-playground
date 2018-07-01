@@ -1,3 +1,3 @@
-export enum actionTypes {
-  GET_DATA
+export enum ActionTypes {
+  GET_DATA = 'GET_DATA'
 }

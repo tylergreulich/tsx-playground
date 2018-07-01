@@ -1,19 +1,16 @@
-import { actionTypes } from '../actions/actionTypes';
-import { Reducer } from 'redux';
-import { AppState } from '../AppState';
-import { ResultAction } from '../actions/swActions';
+import { ActionTypes } from '../actions/actionTypes';
 
 const initialState = {
   result: []
 };
 
-const swReducer: Reducer<AppState> = (
-  state: AppState = initialState,
-  action: ResultAction
-) => {
+const swReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case actionTypes.GET_DATA:
-      return state;
+    case ActionTypes.GET_DATA:
+      return {
+        ...state,
+        result: action.payload
+      };
 
     default:
       return state;
