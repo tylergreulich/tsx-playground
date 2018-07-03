@@ -1,48 +1,32 @@
 import * as React from 'react';
-import * as Redux from 'redux';
+
+import { SwapiState } from '../../store/swapi/types';
+import { AppState } from '../../store/rootReducer';
+import { getData } from '../../store/swapi/actions';
 import { connect } from 'react-redux';
-import Planets from '../Planets';
-import { ActionTypes } from '../../store/actions/actionTypes';
 
-interface OwnProps {
-  age: number;
-}
+type Props = SwapiState;
 
-interface StateProps {
-  results?: [any];
-}
-
-interface DispatchProps {
-  getData: () => void;
-}
-
-type Props = StateProps & DispatchProps & OwnProps;
-
-class Data extends React.Component<Props> {
+class Data extends React.Component<Props & { getData: () => any }> {
   public componentDidMount() {
     this.props.getData();
   }
 
   public render() {
-    console.log(this.props.results);
+    console.log(this.props);
     return (
-      <div>
-        <Planets />
-      </div>
+      <section>
+        <h1>SWAPI</h1>
+      </section>
     );
   }
 }
 
-const mapStateToProps = (state: {}, ownProps: OwnProps): StateProps => ({});
-
-const mapDispatchToProps = (
-  dispatch: Redux.Dispatch<any>,
-  ownProps: OwnProps
-): DispatchProps => ({
-  getData: () => dispatch({ type: ActionTypes.GET_DATA })
+const mapStateToProps = (state: AppState) => ({
+  swapiProps: state.swapi
 });
 
-export default connect<StateProps, DispatchProps, OwnProps>(
+export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getData }
 )(Data);
