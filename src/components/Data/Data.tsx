@@ -7,7 +7,15 @@ import { connect } from 'react-redux';
 
 type Props = SwapiState;
 
-class Data extends React.Component<Props & { getData: () => any }> {
+export interface DataProps {
+  getData?: () => void;
+}
+
+class Data extends React.Component<Props & DataProps> {
+  public static defaultProps: Partial<DataProps> = {
+    getData: () => console.log('Default Props')
+  };
+
   public componentDidMount() {
     this.props.getData();
   }
