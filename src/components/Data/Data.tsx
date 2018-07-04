@@ -15,17 +15,16 @@ export interface DataProps extends RouteComponentProps<any> {
     data: [
       {
         results: [
-          {
-            name: string;
-          }
+          {}
         ];
       }
     ];
   };
+  onClick?: () => void;
 }
 
 class Data extends React.Component<
-  Props & DataProps & { getData: () => any; history: () => void }
+  Props & { getData: () => any; history: () => void } & DataProps
 > {
   public componentDidMount() {
     this.props.getData();
@@ -33,37 +32,25 @@ class Data extends React.Component<
 
   public render() {
     const { data } = this.props.swapiProps;
+    console.log(data[0]);
 
     let swapiData;
 
     if (data[0]) {
-      console.log(this.props.swapiProps);
-      const swapiMap = data[0].results.map(
-        result =>
-          (swapiData = (
-            <div
-              style={{
-                width: '500px',
-                margin: '0 auto',
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              {result.name}
-            </div>
-          ))
-      );
-      console.log(data[0].results);
+      const swapiMap = data[0].results.map((person: { name: string }) => {
+        swapiData = <div>{person.name}</div>;
+      });
     }
 
     return (
-      <section>
-        <h1 onClick={() => this.props.history.push('/history-push-test')}>
-          SWAPI
-        </h1>
-        <DataTest name={'Tyler'} age={22} />
-        {swapiData}
-      </section>
+      <div>
+        <section>
+          <h1 onClick={() => this.props.history.push('/history-push-test')}>
+            SWAPI
+          </h1>
+          {swapiData}
+        </section>
+      </div>
     );
   }
 }
