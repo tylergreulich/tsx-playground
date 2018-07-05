@@ -1,21 +1,23 @@
 import * as React from 'react';
-
 import { SwapiState } from '../../store/swapi/types';
 import { AppState } from '../../store/rootReducer';
 import { getData } from '../../store/swapi/actions';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import './DataClasses.css';
 
-import DataTest from './dataTest';
+import DataResults from './DataResults';
 
 type Props = SwapiState;
 
-export interface DataProps extends RouteComponentProps<any> {
+export interface DataProps extends RouteComponentProps<{}> {
   swapiProps: {
     data: [
       {
         results: [
-          {}
+          {
+            name: string;
+          }
         ];
       }
     ];
@@ -23,32 +25,24 @@ export interface DataProps extends RouteComponentProps<any> {
   onClick?: () => void;
 }
 
-class Data extends React.Component<
-  Props & { getData: () => any; history: () => void } & DataProps
-> {
+export interface DataState {
+  isActive: boolean;
+}
+
+class Data extends React.Component<Props & { getData: () => any } & DataProps> {
   public componentDidMount() {
     this.props.getData();
   }
 
   public render() {
-    const { data } = this.props.swapiProps;
-    console.log(data[0]);
-
-    let swapiData;
-
-    if (data[0]) {
-      const swapiMap = data[0].results.map((person: { name: string }) => {
-        swapiData = <div>{person.name}</div>;
-      });
-    }
-
     return (
       <div>
         <section>
           <h1 onClick={() => this.props.history.push('/history-push-test')}>
             SWAPI
           </h1>
-          {swapiData}
+          <p>Change Color</p>
+          <DataResults {...this.props} />
         </section>
       </div>
     );
