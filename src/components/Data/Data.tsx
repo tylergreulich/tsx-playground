@@ -1,35 +1,18 @@
 import * as React from 'react';
-import { SwapiState } from '../../store/swapi/types';
+import { CoinState } from '../../store/coin/types';
 import { AppState } from '../../store/rootReducer';
-import { getData } from '../../store/swapi/actions';
+import { getData } from '../../store/coin/actions';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import './DataClasses.css';
 
 import DataResults from './DataResults';
+import { DataProps } from '../models/DataProps';
 
-type Props = SwapiState;
-
-export interface DataProps extends RouteComponentProps<{}> {
-  swapiProps: {
-    data: [
-      {
-        results: [
-          {
-            name: string;
-          }
-        ];
-      }
-    ];
-  };
-  onClick?: () => void;
-}
-
-export interface DataState {
-  isActive: boolean;
-}
-
-class Data extends React.Component<Props & { getData: () => any } & DataProps> {
+class Data extends React.Component<
+  DataProps & { getData: () => any },
+  CoinState
+> {
   public componentDidMount() {
     this.props.getData();
   }
@@ -50,7 +33,7 @@ class Data extends React.Component<Props & { getData: () => any } & DataProps> {
 }
 
 const mapStateToProps = (state: AppState): any => ({
-  swapiProps: state.swapi
+  coin: state.coin
 });
 
 export default connect(

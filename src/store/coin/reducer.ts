@@ -1,15 +1,15 @@
-import { SwapiState, SwapiActions } from './types';
+import { CoinState, CoinActions } from './types';
 import { Reducer } from 'redux';
 
-export const initialState: SwapiState = {
+export const initialState: CoinState = {
   data: []
 };
 
-const reducer: Reducer<SwapiState> = (
-  state: SwapiState = initialState,
+const reducer: Reducer<CoinState> = (
+  state: CoinState = initialState,
   action
 ) => {
-  switch ((action as SwapiActions).type) {
+  switch ((action as CoinActions).type) {
     case 'GET_DATA':
       return { ...state, data: [action.payload, ...state.data] };
 

@@ -1,10 +1,10 @@
 import { Action } from 'redux';
 
-export interface SwapiState {
-  data: PersonData[];
+export interface CoinState {
+  data: CoinData[];
 }
 
-export interface PersonData {
+export interface CoinData {
   name: string;
   eye_color: string;
   birth_year: string;
@@ -12,7 +12,7 @@ export interface PersonData {
 
 export interface GetDataAction extends Action {
   type: 'GET_DATA';
-  payload: PersonData;
+  payload: CoinData;
 }
 
-export type SwapiActions = GetDataAction;
+export type CoinActions = GetDataAction;

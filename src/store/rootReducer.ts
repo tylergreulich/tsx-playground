@@ -1,14 +1,14 @@
 import { combineReducers, Reducer } from 'redux';
 
-import { SwapiState } from './swapi/types';
-import swapiReducer from './swapi/reducer';
+import { CoinState } from './coin/types';
+import coinReducer from './coin/reducer';
 
 export interface AppState {
-  swapi: SwapiState;
+  coin: CoinState;
 }
 
 export const rootReducer: Reducer<AppState> = combineReducers<AppState>({
-  swapi: swapiReducer
+  coin: coinReducer
 });
 
 export default rootReducer;
