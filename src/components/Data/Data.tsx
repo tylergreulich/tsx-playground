@@ -8,25 +8,54 @@ import './DataClasses.css';
 
 import DataResults from './DataResults';
 import { DataProps } from '../models/DataProps';
+import DataFilters from './DataFilters/DataFilters';
+
+import { CryptoContainer, ResultsLabel } from '../StyledComponents/Data';
+
+interface DataState {
+  accumMarketCap: number;
+}
 
 class Data extends React.Component<
   DataProps & { getData: () => any },
-  CoinState
+  CoinState & DataState
 > {
   public componentDidMount() {
     this.props.getData();
   }
 
+  public calcMarketCap = () => {
+    const { data } = this.props.coin;
+    if (data[0] !== undefined) {
+      Object.keys(data[0].data)
+        .map(item => data[0].data[item].quotes.USD.market_cap)
+        .reduce((total, amount) => Math.round(total + amount));
+    }
+  };
+
   public render() {
+    console.log(this.state);
     return (
       <div>
-        <section>
+        <CryptoContainer>
           <h1 onClick={() => this.props.history.push('/history-push-test')}>
-            SWAPI
+            Top 100 Cryptos
           </h1>
-          <p>Change Color</p>
+          <div>
+            <h3>{`Market Cap: Null`}</h3>
+            <h3>{`24h Vol`}</h3>
+          </div>
+          <ResultsLabel>
+            <div>#</div>
+            <div>Name</div>
+            <div>{`Market Cap (USD)`}</div>
+            <div>{`Price (USD)`}</div>
+            <div>{`Volume (24h)`}</div>
+            <div>{`Change (24h)`}</div>
+          </ResultsLabel>
           <DataResults {...this.props} />
-        </section>
+          {this.calcMarketCap()}
+        </CryptoContainer>
       </div>
     );
   }

@@ -6,16 +6,13 @@ export interface DataProps extends RouteComponentProps<{}> {
       {
         data: [
           {
-            id: number;
-            name: string;
-            rank: number;
-            symbol: string;
             quotes: {
               USD: {
                 price: number;
                 percent_change_1h: number;
                 percent_change_7d: number;
                 percent_change_24h: number;
+                market_cap: number;
               };
             };
           }
@@ -24,4 +21,5 @@ export interface DataProps extends RouteComponentProps<{}> {
     ];
   };
   onClick?: () => void;
+  style?: string;
 }
