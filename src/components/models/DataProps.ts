@@ -22,4 +22,7 @@ export interface DataProps extends RouteComponentProps<{}> {
   };
   onClick?: () => void;
   style?: string;
+  value: string;
+  changed: () => any;
+  changedValue: () => any;
 }

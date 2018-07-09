@@ -11,6 +11,7 @@ export const CryptoContainer = styled.section`
   align-items: center;
   flex-direction: column;
   font-size: 1.3rem;
+  border: 0.1rem solid #eee;
 
   h1 {
     width: 100%;
@@ -22,6 +23,16 @@ export const CryptoContainer = styled.section`
   }
 `;
 
+export const MarketCapContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 6rem;
+  color: #eee;
+`;
+
 export const ResultsLabel = styled.section`
   display: grid;
   grid-template: 5rem / 0.5fr 1fr 1fr 1fr 1fr 1fr;
@@ -29,6 +40,7 @@ export const ResultsLabel = styled.section`
   justify-items: center;
   align-items: center;
   color: #eee;
+  font-size: 1.75rem;
 `;
 
 export const Results = styled.div`
@@ -41,8 +53,9 @@ export const Results = styled.div`
 export const ResultContainer = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+  font-size: 1.75rem;
   justify-items: center;
   align-items: center;
   color: ${(props: StyledProps) =>
-    props.positiveGrowth ? 'lightgreen' : 'red'};
+    props.positiveGrowth ? 'lightgreen' : '#f74636'};
 `;

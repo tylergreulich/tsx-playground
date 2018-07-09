@@ -4,47 +4,54 @@ import { AppState } from '../../store/rootReducer';
 import { getData } from '../../store/coin/actions';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import './DataClasses.css';
 
 import DataResults from './DataResults';
 import { DataProps } from '../models/DataProps';
-import DataFilters from './DataFilters/DataFilters';
+import DataFilters from '../UI/DataFilters';
+import MarketCap from '../UI/MarketCap';
 
-import { CryptoContainer, ResultsLabel } from '../StyledComponents/Data';
+import {
+  CryptoContainer,
+  MarketCapContainer,
+  ResultsLabel
+} from '../StyledComponents/Data';
 
 interface DataState {
-  accumMarketCap: number;
+  filterByPositive: boolean;
+  filterByNegative: boolean;
 }
 
 class Data extends React.Component<
   DataProps & { getData: () => any },
-  CoinState & DataState
+  DataState,
+  CoinState
 > {
+  public state: DataState = {
+    filterByPositive: false,
+    filterByNegative: false
+  };
+
   public componentDidMount() {
     this.props.getData();
   }
 
-  public calcMarketCap = () => {
-    const { data } = this.props.coin;
-    if (data[0] !== undefined) {
-      Object.keys(data[0].data)
-        .map(item => data[0].data[item].quotes.USD.market_cap)
-        .reduce((total, amount) => Math.round(total + amount));
-    }
-  };
-
   public render() {
-    console.log(this.state);
+    if (this.state.filterByPositive) {
+      console.log('positive');
+    }
+
     return (
       <div>
         <CryptoContainer>
           <h1 onClick={() => this.props.history.push('/history-push-test')}>
             Top 100 Cryptos
           </h1>
-          <div>
-            <h3>{`Market Cap: Null`}</h3>
-            <h3>{`24h Vol`}</h3>
-          </div>
+          <MarketCapContainer>
+            <h3>
+              Market Cap: <MarketCap {...this.props} />{' '}
+            </h3>
+          </MarketCapContainer>
+          <DataFilters {...this.props} />
           <ResultsLabel>
             <div>#</div>
             <div>Name</div>
@@ -54,7 +61,6 @@ class Data extends React.Component<
             <div>{`Change (24h)`}</div>
           </ResultsLabel>
           <DataResults {...this.props} />
-          {this.calcMarketCap()}
         </CryptoContainer>
       </div>
     );
