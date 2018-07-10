@@ -23,6 +23,9 @@ export interface DataProps extends RouteComponentProps<{}> {
   onClick?: () => void;
   style?: string;
   value: string;
-  changed: () => any;
+  filterValue: string;
+  filter: string;
+  changed: (event: React.FormEvent) => void;
   changedValue: () => any;
+  getData: () => Promise<null>;
 }

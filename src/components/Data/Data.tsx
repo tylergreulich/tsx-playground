@@ -19,21 +19,24 @@ import {
 interface DataState {
   filterByPositive: boolean;
   filterByNegative: boolean;
+  optionFilter: string;
 }
 
-class Data extends React.Component<
-  DataProps & { getData: () => any },
-  DataState,
-  CoinState
-> {
+class Data extends React.Component<DataProps, DataState | CoinState> {
   public state: DataState = {
     filterByPositive: false,
-    filterByNegative: false
+    filterByNegative: false,
+    optionFilter: ''
   };
 
   public componentDidMount() {
     this.props.getData();
   }
+
+  public onChangeHandler = (event: React.FormEvent<HTMLSelectElement>) => {
+    this.setState({ optionFilter: event.currentTarget.value });
+    console.log(this.state.optionFilter);
+  };
 
   public render() {
     if (this.state.filterByPositive) {
@@ -51,7 +54,11 @@ class Data extends React.Component<
               Market Cap: <MarketCap {...this.props} />{' '}
             </h3>
           </MarketCapContainer>
-          <DataFilters {...this.props} />
+          <DataFilters
+            {...this.props}
+            changed={this.onChangeHandler}
+            filterValue={this.state.optionFilter}
+          />
           <ResultsLabel>
             <div>#</div>
             <div>Name</div>
@@ -60,7 +67,7 @@ class Data extends React.Component<
             <div>{`Volume (24h)`}</div>
             <div>{`Change (24h)`}</div>
           </ResultsLabel>
-          <DataResults {...this.props} />
+          <DataResults {...this.props} filter={this.state.optionFilter} />
         </CryptoContainer>
       </div>
     );
