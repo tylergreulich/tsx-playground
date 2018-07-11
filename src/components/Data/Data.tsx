@@ -17,16 +17,12 @@ import {
 } from '../StyledComponents/Data';
 
 interface DataState {
-  filterByPositive: boolean;
-  filterByNegative: boolean;
-  optionFilter: string;
+  rankFilter: string;
 }
 
 class Data extends React.Component<DataProps, DataState | CoinState> {
   public state: DataState = {
-    filterByPositive: false,
-    filterByNegative: false,
-    optionFilter: ''
+    rankFilter: ''
   };
 
   public componentDidMount() {
@@ -34,15 +30,10 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
   }
 
   public onChangeHandler = (event: React.FormEvent<HTMLSelectElement>) => {
-    this.setState({ optionFilter: event.currentTarget.value });
-    console.log(this.state.optionFilter);
+    this.setState({ rankFilter: event.currentTarget.value });
   };
 
   public render() {
-    if (this.state.filterByPositive) {
-      console.log('positive');
-    }
-
     return (
       <div>
         <CryptoContainer>
@@ -54,11 +45,7 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
               Market Cap: <MarketCap {...this.props} />{' '}
             </h3>
           </MarketCapContainer>
-          <DataFilters
-            {...this.props}
-            changed={this.onChangeHandler}
-            filterValue={this.state.optionFilter}
-          />
+          <DataFilters {...this.props} changed={this.onChangeHandler} />
           <ResultsLabel>
             <div>#</div>
             <div>Name</div>
@@ -67,7 +54,7 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
             <div>{`Volume (24h)`}</div>
             <div>{`Change (24h)`}</div>
           </ResultsLabel>
-          <DataResults {...this.props} filter={this.state.optionFilter} />
+          <DataResults {...this.props} filter={this.state.rankFilter} />
         </CryptoContainer>
       </div>
     );
