@@ -3,20 +3,44 @@ import { DataProps } from '../models/DataProps';
 import NumberFormat from '../NumberFormat/NumberFormat';
 
 import { ResultContainer, Results } from '../StyledComponents/Data';
-import { SortByPositive, SortByNegative } from './Sort';
+// import { SortByPositive, SortByNegative } from './Sort';
 
 class DataResults extends React.Component<DataProps, {}> {
   public render() {
     const { data } = this.props.coin;
-    const { filter } = this.props;
+    const { filterByRank, filterByShow, filterByChange } = this.props;
 
     let coinData: any[] = [];
 
     if (data[0] !== undefined) {
-      if (filter === 'positive' || filter === null) {
-        SortByPositive(coinData, data);
-      } else if (filter === 'negative') {
-        SortByNegative(coinData, data);
+      if (filterByRank === 'positive') {
+        coinData = Object.keys(data[0].data)
+          .map(item => data[0].data[item])
+          .sort((a, b) => a.rank - b.rank);
+      } else if (filterByRank === 'negative') {
+        coinData = Object.keys(data[0].data)
+          .map(item => data[0].data[item])
+          .sort((a, b) => b.rank - a.rank);
+      } else {
+        coinData = Object.keys(data[0].data)
+          .map(item => data[0].data[item])
+          .sort((a, b) => a.rank - b.rank);
+      }
+
+      if (filterByChange === 'positive') {
+        coinData = Object.keys(data[0].data)
+          .map(item => data[0].data[item])
+          .sort(
+            (a, b) =>
+              b.quotes.USD.percent_change_24h - a.quotes.USD.percent_change_24h
+          );
+      } else if (filterByChange === 'negative') {
+        coinData = Object.keys(data[0].data)
+          .map(item => data[0].data[item])
+          .sort(
+            (a, b) =>
+              a.quotes.USD.percent_change_24h - b.quotes.USD.percent_change_24h
+          );
       }
     }
 

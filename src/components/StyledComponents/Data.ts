@@ -11,7 +11,6 @@ export const CryptoContainer = styled.section`
   align-items: center;
   flex-direction: column;
   font-size: 1.3rem;
-  border: 0.1rem solid #eee;
 
   h1 {
     width: 100%;

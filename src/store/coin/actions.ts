@@ -4,7 +4,7 @@ import { CoinData } from './types';
 
 export const getData = (coin: CoinData) => (dispatch: Dispatch) => {
   axios
-    .get('https://api.coinmarketcap.com/v2/ticker/?limit=30')
+    .get('https://api.coinmarketcap.com/v2/ticker/?limit=100')
     .then(res => dispatch({ type: 'GET_DATA', payload: res.data }))
     .catch(err => console.log(err));
 };

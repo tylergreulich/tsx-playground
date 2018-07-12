@@ -17,20 +17,44 @@ import {
 } from '../StyledComponents/Data';
 
 interface DataState {
-  rankFilter: string;
+  filterRank: string;
+  filterChange: string;
+  filterShow: string;
 }
 
 class Data extends React.Component<DataProps, DataState | CoinState> {
   public state: DataState = {
-    rankFilter: ''
+    filterRank: '',
+    filterChange: '',
+    filterShow: ''
   };
 
   public componentDidMount() {
     this.props.getData();
   }
 
-  public onChangeHandler = (event: React.FormEvent<HTMLSelectElement>) => {
-    this.setState({ rankFilter: event.currentTarget.value });
+  public onChangeRankHandler = (event: React.FormEvent<HTMLSelectElement>) => {
+    this.setState({
+      filterChange: '',
+      filterShow: '',
+      filterRank: event.currentTarget.value
+    });
+  };
+
+  public onChangeShowHandler = (event: React.FormEvent<HTMLSelectElement>) => {
+    this.setState({
+      filterChange: '',
+      filterShow: event.currentTarget.value,
+      filterRank: ''
+    });
+  };
+
+  public onChangeGrowthHandler = (
+    event: React.FormEvent<HTMLSelectElement>
+  ) => {
+    this.setState({
+      filterChange: event.currentTarget.value
+    });
   };
 
   public render() {
@@ -45,7 +69,12 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
               Market Cap: <MarketCap {...this.props} />{' '}
             </h3>
           </MarketCapContainer>
-          <DataFilters {...this.props} changed={this.onChangeHandler} />
+          <DataFilters
+            {...this.props}
+            changeRank={this.onChangeRankHandler}
+            changeShow={this.onChangeShowHandler}
+            changeGrowth={this.onChangeGrowthHandler}
+          />
           <ResultsLabel>
             <div>#</div>
             <div>Name</div>
@@ -54,7 +83,12 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
             <div>{`Volume (24h)`}</div>
             <div>{`Change (24h)`}</div>
           </ResultsLabel>
-          <DataResults {...this.props} filter={this.state.rankFilter} />
+          <DataResults
+            {...this.props}
+            filterByRank={this.state.filterRank}
+            filterByShow={this.state.filterShow}
+            filterByChange={this.state.filterChange}
+          />
         </CryptoContainer>
       </div>
     );
