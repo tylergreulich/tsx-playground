@@ -20,13 +20,15 @@ interface DataState {
   filterRank: string;
   filterChange: string;
   filterShow: string;
+  limit: number;
 }
 
 class Data extends React.Component<DataProps, DataState | CoinState> {
   public state: DataState = {
     filterRank: '',
     filterChange: '',
-    filterShow: ''
+    filterShow: '',
+    limit: 0
   };
 
   public componentDidMount() {
@@ -44,9 +46,11 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
   public onChangeShowHandler = (event: React.FormEvent<HTMLSelectElement>) => {
     this.setState({
       filterChange: '',
-      filterShow: event.currentTarget.value,
+      limit: event.currentTarget.value,
       filterRank: ''
     });
+    console.log('Event Value', event.currentTarget.value);
+    console.log('Limit Value', this.state.limit);
   };
 
   public onChangeGrowthHandler = (
@@ -74,6 +78,7 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
             changeRank={this.onChangeRankHandler}
             changeShow={this.onChangeShowHandler}
             changeGrowth={this.onChangeGrowthHandler}
+            limit={this.state.limit}
           />
           <ResultsLabel>
             <div>#</div>
@@ -88,6 +93,7 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
             filterByRank={this.state.filterRank}
             filterByShow={this.state.filterShow}
             filterByChange={this.state.filterChange}
+            limit={this.state.limit}
           />
         </CryptoContainer>
       </div>

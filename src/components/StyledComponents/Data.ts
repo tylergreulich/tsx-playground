@@ -44,7 +44,7 @@ export const ResultsLabel = styled.section`
 
 export const Results = styled.div`
   display: grid;
-  grid-template-rows: repeat(30, 50px);
+  grid-template-rows: repeat(100, 50px);
   width: 100%;
   align-items: center;
 `;

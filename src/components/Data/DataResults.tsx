@@ -3,7 +3,6 @@ import { DataProps } from '../models/DataProps';
 import NumberFormat from '../NumberFormat/NumberFormat';
 
 import { ResultContainer, Results } from '../StyledComponents/Data';
-// import { SortByPositive, SortByNegative } from './Sort';
 
 class DataResults extends React.Component<DataProps, {}> {
   public render() {
@@ -42,6 +41,28 @@ class DataResults extends React.Component<DataProps, {}> {
               a.quotes.USD.percent_change_24h - b.quotes.USD.percent_change_24h
           );
       }
+    }
+
+    if (this.props.limit === 100) {
+      coinData = Object.keys(data[0].data)
+        .map(item => data[0].data[item])
+        .slice(0, 100);
+    } else if (this.props.limit === 75) {
+      coinData = Object.keys(data[0].data)
+        .map(item => data[0].data[item])
+        .slice(0, 75);
+    } else if (this.props.limit === 50) {
+      coinData = Object.keys(data[0].data)
+        .map(item => data[0].data[item])
+        .slice(0, 50);
+    } else if (this.props.limit === 20) {
+      coinData = Object.keys(data[0].data)
+        .map(item => data[0].data[item])
+        .slice(0, 20);
+    } else if (this.props.limit === 10) {
+      coinData = Object.keys(data[0].data)
+        .map(item => data[0].data[item])
+        .slice(0, 10);
     }
 
     return (
