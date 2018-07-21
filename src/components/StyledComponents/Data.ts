@@ -20,6 +20,10 @@ export const CryptoContainer = styled.section`
     padding: 1rem 0;
     font-size: 3.25rem;
   }
+
+  div.resultDiv:nth-child(2n + 2) {
+    background-color: #070a0f;
+  }
 `;
 
 export const MarketCapContainer = styled.div`

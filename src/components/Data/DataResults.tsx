@@ -66,7 +66,7 @@ class DataResults extends React.Component<DataProps, {}> {
     }
 
     return (
-      <Results>
+      <Results className="resultDiv">
         {coinData.map(result => (
           <section key={result.id}>
             <ResultContainer
