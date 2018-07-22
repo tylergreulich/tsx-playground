@@ -9,7 +9,9 @@ const marketCap = (props: DataProps) => {
       {data[0] !== undefined
         ? Object.keys(data[0].data)
             .map(item => data[0].data[item].quotes.USD.market_cap)
-            .reduce((total, amount) => <NumberFormat value={total + amount} />)
+            .reduce((total: number, amount: number) => (
+              <NumberFormat value={total + amount} />
+            ))
         : 0}
     </span>
   );

@@ -8,7 +8,7 @@ export const initialState: CoinState = {
 const reducer: Reducer<CoinState> = (
   state: CoinState = initialState,
   action
-) => {
+): CoinState => {
   switch ((action as CoinActions).type) {
     case 'GET_DATA':
       return { ...state, data: [action.payload, ...state.data] };

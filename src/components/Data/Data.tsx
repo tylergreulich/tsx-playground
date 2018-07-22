@@ -35,7 +35,9 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
     this.props.getData();
   }
 
-  public onChangeRankHandler = (event: React.FormEvent<HTMLSelectElement>) => {
+  public onChangeRankHandler = (
+    event: React.FormEvent<HTMLSelectElement>
+  ): void => {
     this.setState({
       filterChange: '',
       filterShow: '',
@@ -43,7 +45,9 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
     });
   };
 
-  public onChangeShowHandler = (event: React.FormEvent<HTMLSelectElement>) => {
+  public onChangeShowHandler = (
+    event: React.FormEvent<HTMLSelectElement>
+  ): void => {
     this.setState({
       filterChange: '',
       limit: event.currentTarget.value,
@@ -55,7 +59,7 @@ class Data extends React.Component<DataProps, DataState | CoinState> {
 
   public onChangeGrowthHandler = (
     event: React.FormEvent<HTMLSelectElement>
-  ) => {
+  ): void => {
     this.setState({
       filterChange: event.currentTarget.value
     });
