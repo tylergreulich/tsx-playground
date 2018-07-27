@@ -1,5 +1,4 @@
 import { combineReducers, Reducer } from 'redux';
-
 import { CoinState } from './coin/types';
 import coinReducer from './coin/reducer';
 

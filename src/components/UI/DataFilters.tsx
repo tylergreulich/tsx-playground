@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DataProps } from '../models/DataProps';
 
-class DataFilters extends React.Component<DataProps, {}> {
+export default class DataFilters extends React.Component<DataProps, {}> {
   public render() {
     return (
       <>
@@ -77,4 +77,3 @@ class DataFilters extends React.Component<DataProps, {}> {
   }
 }
 
-export default DataFilters;

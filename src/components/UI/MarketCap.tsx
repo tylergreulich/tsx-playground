@@ -2,7 +2,7 @@ import * as React from 'react';
 import { DataProps } from '../models/DataProps';
 import NumberFormat from '../NumberFormat/NumberFormat';
 
-const marketCap = (props: DataProps) => {
+export default (props: DataProps) => {
   const { data } = props.coin;
   return (
     <span>
@@ -16,5 +16,3 @@ const marketCap = (props: DataProps) => {
     </span>
   );
 };
-
-export default marketCap;

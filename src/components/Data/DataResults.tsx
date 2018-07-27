@@ -4,7 +4,7 @@ import NumberFormat from '../NumberFormat/NumberFormat';
 
 import { ResultContainer, Results } from '../StyledComponents/Data';
 
-class DataResults extends React.Component<DataProps, {}> {
+export default class DataResults extends React.Component<DataProps, {}> {
   public render() {
     const { data } = this.props.coin;
     const { filterByRank, filterByShow, filterByChange } = this.props;
@@ -60,6 +60,7 @@ class DataResults extends React.Component<DataProps, {}> {
         .map(item => data[0].data[item])
         .slice(0, 20);
     } else if (this.props.limit === 10) {
+      console.log(this.props.limit);
       coinData = Object.keys(data[0].data)
         .map(item => data[0].data[item])
         .slice(0, 10);
@@ -68,7 +69,7 @@ class DataResults extends React.Component<DataProps, {}> {
     return (
       <Results className="resultDiv">
         {coinData.map(result => (
-          <section key={result.id}>
+          <section key={result.id} style={{ height: '100%' }}>
             <ResultContainer
               positiveGrowth={result.quotes.USD.percent_change_24h > 0}
             >
@@ -91,5 +92,3 @@ class DataResults extends React.Component<DataProps, {}> {
     );
   }
 }
-
-export default DataResults;
